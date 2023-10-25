@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Your CSS styles for the table can be added here */
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Fill in Student Names</h2>
+        <table>
+            <tr>
+                <th>Last Names</th>
+            </tr>
+            <tr>
+                <td>Student 1:</td>
+                <td><input type="text" id="studentName1" placeholder="Enter a name"></td>
+            </tr>
+            <tr>
+                <td>Student 2:</td>
+                <td><input type="text" id="studentName2" placeholder="Enter a name"></td>
+            </tr>
+            <tr>
+                <td>Student 3:</td>
+                <td><input type="text" id="studentName3" placeholder="Enter a name"></td>
+            </tr>
+            <tr>
+                <td>Student 4:</td>
+                <td><input type="text" id="studentName4" placeholder="Enter a name"></td>
+            </tr>
+            <tr>
+                <td>Student 5:</td>
+                <td><input type="text" id="studentName5" placeholder="Enter a name"></td>
+            </tr>
+        </table>
+        <button onclick="sortNames()">Sort Names</button>
+        <button onclick="clearNames()">Clear Names</button>
+        <div id="sortedNames"></div>
+
+        <h2>Fill in your Daily Expenses</h2>
+        <table>
+            <tr>
+                <th>DAYS</th>
+                <th>Expenses</th>
+            </tr>
+            <tr>
+                <td>Monday:</td>
+                <td><input type="text" id="expenseName1" placeholder="Expense"></td>
+            </tr>
+            <tr>
+                <td>Tuesday:</td>
+                <td><input type="text" id="expenseName2" placeholder="Expense"></td>
+            </tr>
+            <tr>
+                <td>Wednesday:</td>
+                <td><input type="text" id="expenseName3" placeholder="Expense"></td>
+            </tr>
+            <tr>
+                <td>Thursday:</td>
+                <td><input type="text" id="expenseName4" placeholder="Expense"></td>
+            </tr>
+            <tr>
+                <td>Friday:</td>
+                <td><input type="text" id="expenseName5" placeholder="Expense"></td>
+            </tr>
+            <tr>
+                <td>Weekend:</td>
+                <td><input type="text" id="expenseName6" placeholder="Expense"></td>
+            </tr>
+        </table>
+        <button onclick="sortExpenses()">Sort Expenses</button>
+        <button onclick="clearExpenses()">Clear Expenses</button>
+        <div id="sortedExpenses"></div>
+        <div id="minMaxExpenses"></div>
+    </div>
+
+    <script>
+        var students = [];
+        var expenses = [];
+
+        function sortNames() {
+            var sortedStudents = [
+                document.getElementById("studentName1").value,
+                document.getElementById("studentName2").value,
+                document.getElementById("studentName3").value,
+                document.getElementById("studentName4").value,
+                document.getElementById("studentName5").value
+            ].filter(name => name.trim() !== '');
+
+            sortedStudents.sort();
+            document.getElementById("sortedNames").innerHTML = sortedStudents.map((name, index) => 'Student ' + (index + 1) + ': ' + name).join('<br>');
+        }
+
+        function clearNames() {
+            students = [];
+            for (var i = 1; i <= 5; i++) {
+                document.getElementById("studentName" + i).value = '';
+            }
+            document.getElementById("sortedNames").innerHTML = '';
+        }
+
+        function sortExpenses() {
+            expenses = [
+                document.getElementById("expenseName1").value,
+                document.getElementById("expenseName2").value,
+                document.getElementById("expenseName3").value,
+                document.getElementById("expenseName4").value,
+                document.getElementById("expenseName5").value,
+                document.getElementById("expenseName6").value
+            ].filter(expense => expense.trim() !== '');
+
+            expenses.sort();
+            document.getElementById("sortedExpenses").innerHTML = expenses.join('<br>');
+            
+            var minExpense = expenses[0];
+            var maxExpense = expenses[expenses.length - 1];
+            document.getElementById("minMaxExpenses").innerHTML = 'Smallest Expense: ' + minExpense + '<br>' +
+                'Largest Expense: ' + maxExpense;
+        }
+
+        function clearExpenses() {
+            expenses = [];
+            for (var i = 1; i <= 6; i++) {
+                document.getElementById("expenseName" + i).value = '';
+            }
+            document.getElementById("sortedExpenses").innerHTML = '';
+            document.getElementById("minMaxExpenses").innerHTML = '';
+        }
+    </script>
+</body>
+</html>
